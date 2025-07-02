@@ -72,7 +72,6 @@ class HomeProvider extends ChangeNotifier {
         'currency': currency,
         'payment_method_types[]': 'card',
        // 'setup_future_usage': 'off_session',
-        'setup_future_usage': PaymentIntentsFutureUsage.OffSession,
       };
 
       final response = await http.post(
