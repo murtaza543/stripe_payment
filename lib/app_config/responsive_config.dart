@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+
+class ResponsiveConfig {
+  static late MediaQueryData _mediaQueryData;
+  static late double screenWidth;
+  static late double screenHeight;
+  static double? defaultSize;
+  static Orientation? orientation;
+  static double? figmaW;
+  static double? figmaH;
+
+  static init(BuildContext context, [double? figmaWidth, double? figmaHeight ]) {
+    _mediaQueryData = MediaQuery.of(context);
+    screenWidth = _mediaQueryData.size.width;
+    screenHeight = _mediaQueryData.size.height;
+    orientation = _mediaQueryData.orientation;
+    figmaW = figmaWidth ?? 390.0;
+    figmaH = figmaHeight ?? 875.0;
+  }
+}
+
+// Get the proportionate height as per screen size
+double getProportionateScreenHeight(double inputHeight) {
+  double screenHeight = ResponsiveConfig.screenHeight;
+  // 812 is the layout height that designer use
+  return (inputHeight / ResponsiveConfig.figmaH!) * screenHeight;
+}
+
+// Get the proportionate height as per screen size
+double getProportionateScreenWidth(double inputWidth) {
+  double screenWidth = ResponsiveConfig.screenWidth;
+  // 375 is the layout width that designer use
+  return (inputWidth / ResponsiveConfig.figmaW!) * screenWidth;
+}
+bool isMobile(BuildContext context) {
+  return MediaQuery.of(context).size.width < 600;
+}
